@@ -1,0 +1,17 @@
+<app-table
+  [data]="products"
+  [config]="config"
+  [editableRows]="true"
+  [deletableRows]="true"
+  [selectable]="true"
+  [allowAdd]="true"
+  [allowDelete]="true"
+  [allowEdit]="true"
+  [entity]="entity"
+  [lazy]="false"
+  [totalRecords]="totalRecords"
+  (saved)="onEditedProductSave($event)"
+  (deleted)="onDeleteProduct($event)"
+  (lazyLoaded)="getProducts()"
+>
+</app-table>

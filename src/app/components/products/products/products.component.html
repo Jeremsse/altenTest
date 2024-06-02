@@ -1,0 +1,86 @@
+<!-- Parent Component Template -->
+<app-list
+  [items]="products"
+  [pagination]="true"
+  [totalRecords]="totalRecords"
+  [sortOptions]="sortOptions"
+  [sortKey]="'name'"
+  [selectable]="false"
+  [listItemTemplate]="listItemTemplate"
+  [gridItemTemplate]="gridItemTemplate"
+>
+</app-list>
+
+<ng-template #listItemTemplate let-item let-i="index">
+  <div class="list-items-details">
+    <div>
+      <i class="pi pi-tags"></i>
+      {{ item.category }}
+    </div>
+    <div>
+      {{ item.inventoryStatus }}
+    </div>
+    <div>{{ item.name }}</div>
+    <div>{{ item.description }}</div>
+    <div class="item-rating">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+        <i
+          class="pi"
+          [ngClass]="{
+            'pi-star-fill': star <= item.rating,
+            'pi-star': star > item.rating
+          }"
+        ></i>
+      </ng-container>
+    </div>
+    <div class="item-cart">
+      ${{ item.price }}
+      <button
+        class="cart-button"
+        [ngClass]="item.inventoryStatus === 'OUTOFSTOCK' ? 'disabled' : ''"
+        [disabled]="item.inventoryStatus === 'OUTOFSTOCK' ? true : false"
+        (click)="addProduct()"
+      >
+        <i class="pi pi-shopping-cart"></i>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #gridItemTemplate let-item let-i="index">
+  <div class="grid-items-details">
+    <div>
+      <i class="pi pi-tags"></i>
+      {{ item.category }}
+    </div>
+    <div>
+      {{ item.inventoryStatus }}
+    </div>
+    <br />
+    <div>{{ item.name }}</div>
+    <div>{{ item.description }}</div>
+    <br />
+    <div class="item-rating">
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+        <i
+          class="pi"
+          [ngClass]="{
+            'pi-star-fill': star <= item.rating,
+            'pi-star': star > item.rating
+          }"
+        ></i>
+      </ng-container>
+    </div>
+    <div>
+      ${{ item.price }}
+      <button
+        class="cart-button"
+        [ngClass]="item.inventoryStatus === 'OUTOFSTOCK' ? 'disabled' : ''"
+        [disabled]="item.inventoryStatus === 'OUTOFSTOCK' ? true : false"
+        (click)="addProduct()"
+      >
+        <i class="pi pi-shopping-cart"></i>
+      </button>
+    </div>
+  </div>
+</ng-template>
